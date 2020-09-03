@@ -14,8 +14,12 @@ const Decoder = () => {
         })()
     }, []);
 
+    const now = new Date()
+
+
     const handleBarCodeScanned = ({ type, data }) => {
         setScanned(true)
+        localStorage.setItem( `QRCode ${now}`, data)
         alert(`Bar code with type ${type} and data ${data} has been scanned!`)
     }
 

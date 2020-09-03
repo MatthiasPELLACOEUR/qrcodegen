@@ -7,30 +7,26 @@ const Encoder = () => {
 
     const [text, setText] = useState('https://www.youtube.com/watch?v=hAq443fhyDo')
 
-    const QrCodeDisplay = () => {
-        if (text === ''){
-            return(<Text>Tapez quelque chose !</Text>)           
-        } else if ( text !== ''){
-            return (
-                <QRCode 
-                    value={text}
-                    size={200}
-                    bgColor='blue'
-                    fgColor='white'
-                />)
+    const now = new Date()
 
+    const storeData = () => {
+        if(text !== '') {
+            localStorage.setItem( `QRCode ${now}`, text)
         }
     }
-
 
     return (
         <View style={ styles.container }>
             <TextInput 
                 style={styles.input}
-                onChangeText={(text) => setText(text)}
-                value={text}
+                onChangeText={(value) => setText(value)}
+                onSubmitEditing={() => storeData()}
+                onBlur={() => storeData()}
             />
-            {QrCodeDisplay()}
+            { text === '' 
+                ? <Text>Tapez quelque chose !</Text> 
+                : <QRCode value={text} size={200} /> 
+            }
         </View>
     )
 }
@@ -53,7 +49,5 @@ const styles = StyleSheet.create({
 })
 
 AppRegistry.registerComponent('Encoder', () => Encoder)
-
-// module.exports = Encoder
 
 export default Encoder

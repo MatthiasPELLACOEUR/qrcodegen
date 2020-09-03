@@ -3,14 +3,14 @@ import { StyleSheet, Text, View } from 'react-native'
 
 const History = (props) => {
 
+    const ListQrCode = () => {
+        localStorage.getItem('QrCodeGenerated')
+    }
 
     return (
         <View style={ style.view }>
             <Text style={ style.title }>
-                A propos test
-            </Text>
-            <Text>
-                Lorem Ipsum sit amet, consectetur
+                {ListQrCode()}
             </Text>
         </View>
     )
